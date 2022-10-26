@@ -349,6 +349,7 @@ void binarySearchRun()
 int main()
 {
     int choice;
+    printf("----------MultiProcessing----------\n");
     do
     {
         printf(" 1. Merge Sort \n 2. Bubble Sort \n 3. Quick Sort \n 4. Linear Search \n 5. Binary Search \n 6. Exit \n");

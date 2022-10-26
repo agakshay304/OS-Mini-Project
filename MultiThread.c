@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Threads/mergeSortThread.c"
-#include "Threads/insertionSortThread.c"
 #include "Threads/linearSearchThread.c"
 #include "Threads/binarySearchThread.c"
 #include "Threads/quickSortThread.c"
@@ -11,16 +10,19 @@
 
 void mergeSortRun()
 {
-        int i, size;
+        int i;
         NODE n;
         // generating random numbers in array
-        srand(time(NULL));
-        printf("Enter No of elements of Array:\n");
+
+        int size;
+        printf("Enter the size of array: ");
         scanf("%d", &size);
+
+        srand(time(NULL));
         printf("Unsorted Array:\n");
         for (i = 0; i < size; i++)
         {
-                array[i] = rand() % size;
+                array[i] = rand() % 100;
                 printf("%d ", array[i]);
         }
         printf("\n");
@@ -101,7 +103,8 @@ void quickSortRun()
                 printf("%d ", quickarr[i]);
         }
 
-        clock_t t = clock();
+        clock_t startingTime, endingTime;
+        startingTime = clock();
         int x = partition(quickarr, 0, n - 1);
 
         int left_position[2];
@@ -119,15 +122,15 @@ void quickSortRun()
 
         pthread_join(left, NULL);
         pthread_join(right, NULL);
-        t = clock() - t;
-
+        // t = clock() - t;
+        endingTime = clock();
         printf("\nSorted Array : \n");
         for (int i = 0; i < n; i++)
         {
                 printf("%d ", quickarr[i]);
         }
         printf("\n");
-        printf("Time Taken : %.4f\n", (double)t / (double)CLOCKS_PER_SEC);
+        printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
         pthread_exit(NULL);
 }
 
@@ -177,6 +180,7 @@ void binarySearchRun()
 
 int main()
 {
+        printf("----------MultiThreading----------\n");
         int choice;
         do
         {

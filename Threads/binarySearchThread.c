@@ -6,7 +6,7 @@
 #define MAX_THREAD 4
 
 int arr[] = {1, 6, 8, 11, 13, 14, 15, 19, 21, 23, 26, 28, 31, 65, 108, 220};
-int ele = 100;
+int ele = 108;
 int part = 0;
 int found = 0;
 
