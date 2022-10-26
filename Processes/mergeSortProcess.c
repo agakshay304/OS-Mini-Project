@@ -31,7 +31,7 @@ void mergeSort(int arr[], int low, int high)
     }
     else if (lpid == 0)
     {
-        printf("Left Process Running \n ");
+        // printf("Left Process Running \n ");
         mergeSort(arr, low, low + len / 2 - 1);
         _exit(0);
     }
@@ -46,7 +46,7 @@ void mergeSort(int arr[], int low, int high)
         }
         else if (rpid == 0)
         {
-            printf("Right Process Running \n ");
+            // printf("Right Process Running \n ");
             mergeSort(arr, low + len / 2, high);
             _exit(0);
         }

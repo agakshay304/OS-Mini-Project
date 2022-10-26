@@ -7,23 +7,26 @@
 #include "Threads/linearSearchThread.c"
 #include "Threads/binarySearchThread.c"
 #include "Threads/quickSortThread.c"
+#include "Threads/bubbleSortThread.c"
 
 void mergeSortRun()
 {
-        int i;
+        int i, size;
         NODE n;
         // generating random numbers in array
         srand(time(NULL));
+        printf("Enter No of elements of Array:");
         printf("Unsorted Array:\n");
-        for (i = 0; i < MAX_SIZE; i++)
+        scanf("%d", &size);
+        for (i = 0; i < size; i++)
         {
-                array[i] = rand() % 100;
+                array[i] = rand() % size;
                 printf("%d ", array[i]);
         }
         printf("\n");
 
         n.i = 0;
-        n.j = MAX_SIZE - 1;
+        n.j = size - 1;
         pthread_t tid;
 
         int ret;
@@ -41,7 +44,7 @@ void mergeSortRun()
         endingTime = clock();
         printf("Sorted Array:\n");
 
-        for (i = 0; i < MAX_SIZE; i++)
+        for (i = 0; i < size; i++)
                 printf("%d ", array[i]);
 
         printf("\n");
@@ -51,59 +54,43 @@ void mergeSortRun()
         pthread_exit(NULL);
 }
 
-void insertionSortRun()
+void bubbleSortRun()
 {
-        // fill the unsorted array
-        fillArray(SIZE);
-        printArray(unsorted, SIZE);
+        int i;
+        int N;
+        printf("Enter the number of elements in the array: ");
+        scanf("%d", &N);
+        srand(time(NULL));
+        // Filling the array with random integers
+        for (i = 0; i < N; i++)
+        {
+                arr[i] = rand() % 100;
+        }
+        printf("Unsorted Array:\n");
+        for (i = 0; i < N; i++)
+        {
+                printf("%d ", arr[i]);
+        }
+        printf("\n");
 
-        // define the indices of the two sublists
-        int start1 = 0,
-            end1 = SIZE / 2,
-            start2 = end1 + 1,
-            end2 = SIZE - 1;
-
-        // 2 sorting threads, and 1 merge thread
-        pthread_t threads[3];
-
-        // prepare sorting params and fire off sorting threads
-        struct insertionSortParams sArgs[2];
+        pthread_t sorters[2];
         clock_t startingTime, endingTime;
         startingTime = clock();
-        sArgs[0].start = start1;
-        sArgs[0].end = end1;
-        pthread_create(&threads[0], NULL, insertionSort, &sArgs[0]); // deal with first sublist
-
-        sArgs[1].start = start2;
-        sArgs[1].end = end2;
-        pthread_create(&threads[1], NULL, insertionSort, &sArgs[1]); // deal with second sublist
-
-        // wait for sorting threads to terminate
-        pthread_join(threads[0], NULL);
-        pthread_join(threads[1], NULL);
-
+        printf("Sorted Array :\n");
+        for (i = 0; i < 2; i++)
+        {
+                pthread_create(&sorters[i], NULL, sortArr, (void *)i);
+                pthread_join(sorters[i], NULL);
+        }
         endingTime = clock();
-
-        // prepare params and fire off merging thread
-        struct mergeInsertionParams mArgs;
-        mArgs.begin = start1;
-        mArgs.mid = start2;
-        mArgs.end = end2;
-        pthread_create(&threads[2], NULL, mergeInsertion, &mArgs); // merge the sublists into sorted[]!
-
-        // wait for merging thread to terminate
-        pthread_join(threads[2], NULL);
-
-        // main thread prints out the sorted array
-        printArray(sorted, SIZE);
-
         printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
 }
 
 void quickSortRun()
 {
         int n;
-        n = 90;
+        printf("Enter the number of elements: ");
+        scanf("%d", &n);
         int i;
         srand(time(NULL));
         printf("Unsorted Array:\n");
@@ -190,7 +177,7 @@ int main()
         do
         {
                 printf("1. Merge Sort\n");
-                printf("2. Insertion Sort\n");
+                printf("2. Bubble Sort\n");
                 printf("3. Quick Sort\n");
                 printf("4. Linear Search\n");
                 printf("5. Binary Search\n");
@@ -204,7 +191,7 @@ int main()
                         mergeSortRun();
                         break;
                 case 2:
-                        insertionSortRun();
+                        bubbleSortRun();
                         break;
                 case 3:
                         quickSortRun();
