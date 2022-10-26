@@ -77,6 +77,7 @@ void mergeSortRun()
     }
     // calculating time taken in applying merge sort
     printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+    exit(0);
 }
 
 void bubbleSortRun()
@@ -144,6 +145,7 @@ void bubbleSortRun()
     }
     // calculating time taken in applying merge sort
     printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+    exit(0);
 }
 
 void linearSearchRun()
@@ -204,6 +206,7 @@ void linearSearchRun()
     }
     // calculating time taken in applying linear search
     printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+    exit(0);
 }
 
 void quickSortRun()
@@ -270,6 +273,7 @@ void quickSortRun()
     }
     // calculating time taken in applying merge sort
     printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+    exit(0);
 }
 
 void binarySearchRun()
@@ -339,6 +343,7 @@ void binarySearchRun()
 
     // calculating time taken in applying binary search
     printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+    exit(0);
 }
 
 int main()

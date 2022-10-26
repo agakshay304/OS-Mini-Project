@@ -15,9 +15,9 @@ void mergeSortRun()
         NODE n;
         // generating random numbers in array
         srand(time(NULL));
-        printf("Enter No of elements of Array:");
-        printf("Unsorted Array:\n");
+        printf("Enter No of elements of Array:\n");
         scanf("%d", &size);
+        printf("Unsorted Array:\n");
         for (i = 0; i < size; i++)
         {
                 array[i] = rand() % size;
@@ -79,11 +79,12 @@ void bubbleSortRun()
         printf("Sorted Array :\n");
         for (i = 0; i < 2; i++)
         {
-                pthread_create(&sorters[i], NULL, sortArr, (void *)i);
+                pthread_create(&sorters[i], NULL, sortArr, (int *)i);
                 pthread_join(sorters[i], NULL);
         }
         endingTime = clock();
         printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+        pthread_exit(NULL);
 }
 
 void quickSortRun()
@@ -126,7 +127,8 @@ void quickSortRun()
                 printf("%d ", quickarr[i]);
         }
         printf("\n");
-        printf("Time Taken : %.4f", (double)t / (double)CLOCKS_PER_SEC);
+        printf("Time Taken : %.4f\n", (double)t / (double)CLOCKS_PER_SEC);
+        pthread_exit(NULL);
 }
 
 void linearSearchRun()
@@ -148,6 +150,7 @@ void linearSearchRun()
         else
                 printf("Key not found\n");
         printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+        pthread_exit(NULL);
 }
 
 void binarySearchRun()
@@ -169,6 +172,7 @@ void binarySearchRun()
                 printf("Key not found\n");
 
         printf("Time taken: %f\n", (endingTime - startingTime) / (double)CLOCKS_PER_SEC);
+        pthread_exit(NULL);
 }
 
 int main()
