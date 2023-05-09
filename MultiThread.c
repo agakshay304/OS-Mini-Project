@@ -19,6 +19,7 @@ void mergeSortRun()
         scanf("%d", &size);
 
         srand(time(NULL));
+        // taking unsorted array as input
         printf("Unsorted Array:\n");
         for (i = 0; i < size; i++)
         {
